@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/common-fate/httpsig/contentdigest"
+	"github.com/common-fate/httpsig/inmemory"
 	"github.com/common-fate/httpsig/sigparams"
 	"github.com/google/go-cmp/cmp"
 )
@@ -135,7 +136,7 @@ func TestVerifier_Parse(t *testing.T) {
 			},
 			wantBodyReadErr: true, // can't read it as it isn't covered in the signature
 			wantHeaders: http.Header{
-				"content-type": {"application/json"},
+				"Content-Type": {"application/json"},
 			},
 		},
 
@@ -297,5 +298,42 @@ func TestVerifier_Parse(t *testing.T) {
 				t.Errorf("headers mismatch (-want +got):\n%s", diff)
 			}
 		})
+	}
+}
+
+func TestVerifier_ReadResultingHeaders(t *testing.T) {
+
+	v := &Verifier{
+		NonceStorage: inmemory.NewNonceStorage(),
+		KeyDirectory: testAlgSelector{
+			Algorithm: testAlgorithm{
+				Digest: contentdigest.SHA256,
+			},
+		},
+		Authority: "example.com",
+		Scheme:    "https",
+		Tag:       "example-app",
+	}
+
+	req, err := http.NewRequest("POST", "https://example.com", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	req.Header.Add("Content-Type", "application/json")
+	req.Header.Add("Signature", `sig1=:TU9DS19TSUdOQVRVUkU=:`)
+	req.Header.Add("Signature-Input", `sig1=("@method" "@target-uri" "content-digest" "content-length" "content-type");keyid="testkey-123";tag="example-app"`)
+
+	got, _, err := v.Parse(nil, req, time.Time{})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	contentType := got.Header.Get("Content-Type")
+
+	want := "application/json"
+
+	if diff := cmp.Diff(want, contentType); diff != "" {
+		t.Errorf("content-type mismatch (-want +got):\n%s", diff)
 	}
 }

@@ -30,7 +30,9 @@ func Derive(params sigparams.Params, w http.ResponseWriter, req *http.Request, d
 
 		if cc[0] != '@' && cc != "content-digest" && cc != "content-length" {
 			// add the header value to the list of covered headers
-			base.Header[cc] = req.Header.Values(cc)
+			for _, v := range req.Header.Values(cc) {
+				base.Header.Add(cc, v)
+			}
 		}
 	}
 

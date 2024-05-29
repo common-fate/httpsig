@@ -61,7 +61,7 @@ func TestDerive(t *testing.T) {
 					"content-type": "application/json",
 				},
 				Header: http.Header{
-					"content-type": {"application/json"},
+					"Content-Type": {"application/json"},
 				},
 			},
 		},
