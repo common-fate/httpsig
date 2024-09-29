@@ -1,3 +1,7 @@
+/*
+This package contains a main for a simple client that sends a POST request to a
+server that requires a signature using ecdsa-p256-sha256.
+*/
 package main
 
 import (
@@ -13,6 +17,7 @@ import (
 )
 
 func main() {
+	// Example key for testing purposes only, do not use in production
 	keyString := `-----BEGIN EC PRIVATE KEY-----
 MHcCAQEEIFKbhfNZfpDsW43+0+JjUr9K+bTeuxopu653+hBaXGA7oAoGCCqGSM49
 AwEHoUQDQgAEqIVYZVLCrPZHGHjP17CTW0/+D9Lfw0EkjqF7xB4FivAxzic30tMM
