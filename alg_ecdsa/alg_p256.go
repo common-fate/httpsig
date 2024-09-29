@@ -10,7 +10,6 @@ import (
 	"math/big"
 
 	"github.com/common-fate/httpsig/contentdigest"
-	"github.com/common-fate/httpsig/verifier"
 )
 
 const P256_SHA256 = `ecdsa-p256-sha256`
@@ -96,19 +95,4 @@ func (a P256) Verify(ctx context.Context, base string, signature []byte) error {
 	}
 
 	return nil
-}
-
-// StaticKeyDirectory implements the verifier.KeyDirectory interface.
-// It returns a static key regardless of the provided Key ID argument.
-type StaticKeyDirectory struct {
-	Key        *ecdsa.PublicKey
-	Attributes any
-}
-
-func (d StaticKeyDirectory) GetKey(ctx context.Context, kid string, _ string) (verifier.Algorithm, error) {
-	alg := P256{
-		PublicKey: d.Key,
-		Attrs:     d.Attributes,
-	}
-	return alg, nil
 }

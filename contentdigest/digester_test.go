@@ -48,6 +48,12 @@ func TestDigester_HashRequest(t *testing.T) {
 			want:     `sha-256=:47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=:`,
 		},
 		{
+			name:     "sha384",
+			digester: SHA384,
+			req:      io.NopCloser(bytes.NewBufferString(`{"hello": "world"}`)),
+			want:     `sha-384=:J18bw2UtvxqNrirFegHaLA9KXQ7md8zRDoK81RVOwjrn6ke9OXAumdM9r3ccom4a:`,
+		},
+		{
 			name:     "sha256_of_http_no_body",
 			digester: SHA256,
 			req:      http.NoBody,
