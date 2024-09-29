@@ -13,6 +13,8 @@ import (
 	"github.com/common-fate/httpsig/verifier"
 )
 
+const P256_SHA256 = `ecdsa-p256-sha256`
+
 // NewP256Signer returns a signing algorithm based on
 // the provided ecdsa private key.
 func NewP256Signer(key *ecdsa.PrivateKey) *P256 {
@@ -37,7 +39,7 @@ func (a P256) Attributes() any {
 }
 
 func (a P256) Type() string {
-	return "ecdsa-p256-sha256"
+	return P256_SHA256
 }
 
 func (a P256) ContentDigest() contentdigest.Digester {

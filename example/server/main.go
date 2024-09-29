@@ -1,3 +1,7 @@
+/*
+This package contains a main for a simple HTTP server that requires a client
+signature using ecdsa-p256-sha256 with a hard-coded test key
+*/
 package main
 
 import (
@@ -15,6 +19,8 @@ import (
 )
 
 func main() {
+    // Example public key only, do not use for anything other than this example
+    // as the private key is hard-coded in the client
 	keyString := `-----BEGIN PUBLIC KEY-----
 MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEqIVYZVLCrPZHGHjP17CTW0/+D9Lf
 w0EkjqF7xB4FivAxzic30tMM4GF+hR6Dxh71Z50VGGdldkkDXZCnTNnoXQ==

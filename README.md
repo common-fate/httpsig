@@ -1,5 +1,7 @@
 # httpsig
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/common-fate/httpsig.svg)](https://pkg.go.dev/github.com/common-fate/httpsig)
+
 An implementation of [RFC9421: HTTP Message Signatures](https://www.rfc-editor.org/rfc/rfc9421.html) in Go.
 
 This library has support for the following features:
