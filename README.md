@@ -6,7 +6,7 @@ An implementation of [RFC9421: HTTP Message Signatures](https://www.rfc-editor.o
 
 This library has support for the following features:
 
-- Pluggable algorithms for signing and verification.
+- Supports [all active algorithms](https://www.rfc-editor.org/rfc/rfc9421.html#section-6.2.2) for signing and verification, with pluggable interfaces for future additions.
 
 - Support for creating a signed [`content-digest` field](https://www.rfc-editor.org/info/rfc9530) to protect the HTTP request body.
 
