@@ -5,7 +5,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/common-fate/httpsig/contentdigest"
 	"github.com/common-fate/httpsig/signature"
 	"github.com/common-fate/httpsig/sigparams"
 	"github.com/google/go-cmp/cmp"
@@ -17,7 +16,6 @@ func TestSigner_Sign(t *testing.T) {
 		keyID             string
 		alg               Algorithm
 		tag               string
-		digester          contentdigest.Digester
 		now               time.Time
 		nonce             string
 	}

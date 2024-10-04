@@ -97,13 +97,13 @@ func Middleware(opts MiddlewareOpts) func(next http.Handler) http.Handler {
 
 			if errors.As(err, new(*http.MaxBytesError)) {
 				w.WriteHeader(http.StatusRequestEntityTooLarge)
-				w.Write([]byte(http.StatusText(http.StatusRequestEntityTooLarge)))
+				_, _ = w.Write([]byte(http.StatusText(http.StatusRequestEntityTooLarge)))
 				return
 			}
 
 			if err != nil {
 				w.WriteHeader(http.StatusUnauthorized)
-				w.Write([]byte(http.StatusText(http.StatusUnauthorized)))
+				_, _ = w.Write([]byte(http.StatusText(http.StatusUnauthorized)))
 				return
 			}
 

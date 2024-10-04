@@ -59,9 +59,6 @@ func TestVerifier_Parse(t *testing.T) {
 		Authority    string
 		Scheme       string
 	}
-	type args struct {
-		req func() *http.Request
-	}
 	tests := []struct {
 		name            string
 		fields          fields

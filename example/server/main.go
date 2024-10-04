@@ -19,8 +19,8 @@ import (
 )
 
 func main() {
-    // Example public key only, do not use for anything other than this example
-    // as the private key is hard-coded in the client
+	// Example public key only, do not use for anything other than this example
+	// as the private key is hard-coded in the client
 	keyString := `-----BEGIN PUBLIC KEY-----
 MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEqIVYZVLCrPZHGHjP17CTW0/+D9Lf
 w0EkjqF7xB4FivAxzic30tMM4GF+hR6Dxh71Z50VGGdldkkDXZCnTNnoXQ==
@@ -61,7 +61,7 @@ w0EkjqF7xB4FivAxzic30tMM4GF+hR6Dxh71Z50VGGdldkkDXZCnTNnoXQ==
 	mux.Handle("/", verifier(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		attr := httpsig.AttributesFromContext(r.Context()).(exampleAttributes)
 		msg := fmt.Sprintf("hello, %s!", attr.Username)
-		w.Write([]byte(msg))
+		_, _ = w.Write([]byte(msg))
 	})))
 
 	err = http.ListenAndServe("localhost:9091", mux)

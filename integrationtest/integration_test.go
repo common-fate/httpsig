@@ -44,7 +44,7 @@ func TestECDSA(t *testing.T) {
 		_, _, err = v.Parse(w, r, now)
 		if err != nil {
 			w.WriteHeader(http.StatusUnauthorized)
-			w.Write([]byte(err.Error()))
+			_, _ = w.Write([]byte(err.Error()))
 		}
 	}))
 	defer svr.Close()
@@ -115,7 +115,7 @@ func TestECDSA_InvalidSignature(t *testing.T) {
 		_, _, err = v.Parse(w, r, now)
 		if err != nil {
 			w.WriteHeader(http.StatusUnauthorized)
-			w.Write([]byte(err.Error()))
+			_, _ = w.Write([]byte(err.Error()))
 		}
 	}))
 	defer svr.Close()
