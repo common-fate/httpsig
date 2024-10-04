@@ -54,7 +54,7 @@ func TestE2E(t *testing.T) {
 	mux.Handle("/", verifier(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		attr := httpsig.AttributesFromContext(r.Context()).(userAttributes)
 		msg := fmt.Sprintf("hello, %s!", attr.Username)
-		w.Write([]byte(msg))
+		_, _ = w.Write([]byte(msg))
 	})))
 
 	defer server.Close()

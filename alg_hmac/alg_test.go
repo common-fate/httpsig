@@ -45,7 +45,10 @@ func TestHMAC(t *testing.T) {
 			baseFunc: func() string {
 				// return different data each time
 				key := make([]byte, 32)
-				rand.Read(key)
+				_, err := rand.Read(key)
+				if err != nil {
+					panic(err)
+				}
 				return string(key)
 			},
 			wantSignErr:   nil,
@@ -55,7 +58,10 @@ func TestHMAC(t *testing.T) {
 			name: "different key",
 			keyFunc: func() []byte {
 				key := make([]byte, 32)
-				rand.Read(key)
+				_, err := rand.Read(key)
+				if err != nil {
+					panic(err)
+				}
 				return key
 			},
 			baseFunc:      func() string { return `hmac base` },
