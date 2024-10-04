@@ -33,6 +33,14 @@ var SHA256 = Digester{
 	MaxBytes: 10485760, // 10 MB
 }
 
+// SHA384 is a digester which uses the SHA384 hashing algorithm and key,
+// with MaxBytes set to 10MB.
+var SHA384 = Digester{
+	Key:      "sha-384",
+	HashFunc: sha512.New384,
+	MaxBytes: 10485760, // 10 MB
+}
+
 // SHA512 is a digester which uses the SHA512 hashing algorithm and key,
 // with MaxBytes set to 10MB.
 var SHA512 = Digester{
