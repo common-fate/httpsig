@@ -23,7 +23,7 @@ func Derive(params sigparams.Params, w http.ResponseWriter, req *http.Request, d
 
 		val, err := getComponentValue(cc, w, req, digester)
 		if err != nil {
-			return nil, fmt.Errorf("identifier %q: %w", val, err)
+			return nil, fmt.Errorf("identifier %q %q: %w", cc, val, err)
 		}
 
 		base.Values[cc] = val
