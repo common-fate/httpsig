@@ -64,6 +64,28 @@ func Test_getComponentValue(t *testing.T) {
 			want: "example.com",
 		},
 		{
+			name: "empty_path",
+			args: args{
+				identifier: "@path",
+				r: func() *http.Request {
+					req, _ := http.NewRequest("POST", "https://example.com", nil)
+					return req
+				},
+			},
+			want: "/",
+		},
+		{
+			name: "non-empty_path",
+			args: args{
+				identifier: "@path",
+				r: func() *http.Request {
+					req, _ := http.NewRequest("POST", "https://example.com/foo/bar-123", nil)
+					return req
+				},
+			},
+			want: "/foo/bar-123",
+		},
+		{
 			name: "header_value",
 			args: args{
 				identifier: "my-header",
