@@ -89,6 +89,13 @@ func getComponentValue(identifier string, w http.ResponseWriter, r *http.Request
 		}
 		return val, nil
 
+	case "@path":
+		val := r.URL.Path
+		if val == "" {
+			val = "/"
+		}
+		return val, nil
+
 	case "content-length":
 		return httpsfv.Marshal(httpsfv.NewItem(r.ContentLength))
 
