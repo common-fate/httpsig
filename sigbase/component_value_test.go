@@ -86,6 +86,17 @@ func Test_getComponentValue(t *testing.T) {
 			want: "/foo/bar-123",
 		},
 		{
+			name: "escaped_path",
+			args: args{
+				identifier: "@path",
+				r: func() *http.Request {
+					req, _ := http.NewRequest("POST", "https://example.com/foo%2Fbar%20baz", nil)
+					return req
+				},
+			},
+			want: "/foo%2Fbar%20baz",
+		},
+		{
 			name: "header_value",
 			args: args{
 				identifier: "my-header",
