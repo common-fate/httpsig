@@ -90,7 +90,9 @@ func getComponentValue(identifier string, w http.ResponseWriter, r *http.Request
 		return val, nil
 
 	case "@path":
-		val := r.URL.Path
+		// RFC 9421 section 2.2.6: the path is taken before any
+		// percent-encoded octets are decoded, so r.URL.Path can't be used.
+		val := r.URL.EscapedPath()
 		if val == "" {
 			val = "/"
 		}
